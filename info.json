@@ -1,0 +1,10 @@
+{
+  "name": "zweihander-soundpack",
+  "version": "0.0.1",
+  "factorio_version": "2.0",
+  "title": "Zweihander Soundpack",
+  "author": "zweihander",
+  "homepage": "",
+  "description": "Funni sound pack XD",
+  "dependencies": ["base >= 2.0.0", "? space-age >= 2.0.0"]
+}

@@ -1,0 +1,20 @@
+{
+    "runtime.version": "Lua 5.2",
+    "diagnostics.globals": [
+        "data",
+        "mods",
+        "settings",
+        "script",
+        "game",
+        "defines",
+        "storage",
+        "remote",
+        "commands",
+        "rcon",
+        "rendering",
+        "log",
+        "serpent",
+        "table_size",
+        "helpers"
+    ]
+}
