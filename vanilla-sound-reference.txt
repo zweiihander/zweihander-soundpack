@@ -1,0 +1,121 @@
+ZWEIHANDER SOUNDPACK - VANILLA SOUND REFERENCE (Factorio base mod, 2.0/2.1)
+=============================================================================
+1) BOT SOUNDS  (data.raw["construction-robot"|"logistic-robot"|"combat-robot"|"roboport"])
+-----------------------------------------------------------------------------
+construction-robot ("construction-robot"):
+  repairing_sound   -> __base__/sound/robot-repair-1.ogg .. robot-repair-6.ogg
+  working_sound     -> __base__/sound/construction-robot-1.ogg .. construction-robot-2.ogg (flight loop)
+  charging_sound    -> __base__/sound/robot-charging-1.ogg .. robot-charging-7.ogg
+
+logistic-robot ("logistic-robot"):
+  working_sound     -> __base__/sound/construction-robot-11.ogg, construction-robot-12.ogg (shared "flying_robot" set)
+  charging_sound    -> __base__/sound/robot-charging-1.ogg .. robot-charging-7.ogg (same set as above)
+
+combat-robot ("distractor" / "defender" / "destroyer"):
+  distractor.working_sound.sound -> __base__/sound/fight/distractor-robot-loop.ogg
+  defender / destroyer use the same robot_animations/working_sound pattern (see entities.lua ~line 550-610)
+
+roboport ("roboport"):
+  open_sound        -> __base__/sound/open-close/roboport-open.ogg
+  close_sound       -> __base__/sound/open-close/roboport-close.ogg
+  working_sound     -> __base__/sound/roboport-working.ogg
+
+utility-sounds (data.raw["utility-sounds"]["default"]) relevant to bots:
+  deconstruct_robot -> __core__/sound/deconstruct-robot.ogg   (deconstruction planner "eating" sound)
+
+-----------------------------------------------------------------------------
+2) BITER / SPITTER / WORM SOUNDS  (data.raw["unit"] and data.raw["turret"])
+-----------------------------------------------------------------------------
+Biters - small-biter / medium-biter / big-biter / behemoth-biter:
+  attack_parameters.sound (roar on attack)
+    small     -> __base__/sound/creatures/biter-roar-1.ogg .. biter-roar-6.ogg
+    medium    -> __base__/sound/creatures/biter-roar-mid-1.ogg .. biter-roar-mid-7.ogg
+    big       -> __base__/sound/creatures/biter-roar-big-1.ogg .. biter-roar-big-5.ogg
+    behemoth  -> __base__/sound/creatures/biter-roar-behemoth-1.ogg .. biter-roar-behemoth-9.ogg
+  dying_sound
+    small/medium -> __base__/sound/creatures/biter-death-1.ogg .. biter-death-5.ogg
+    big/behemoth -> __base__/sound/creatures/biter-death-big-1.ogg .. biter-death-big-5.ogg
+  working_sound (idle "calls")
+    small     -> __base__/sound/creatures/biter-call-1.ogg .. biter-call-5.ogg
+    big       -> __base__/sound/creatures/biter-call-big-1.ogg .. biter-call-big-6.ogg
+    behemoth  -> __base__/sound/creatures/biter-call-behemoth-1.ogg .. biter-call-behemoth-6.ogg
+  walking_sound
+    small/med -> __base__/sound/creatures/biter-walk-1.ogg .. biter-walk-7.ogg
+    big/beh   -> __base__/sound/creatures/biter-walk-big-1.ogg .. biter-walk-big-10.ogg
+
+Spitters - small-spitter / medium-spitter / big-spitter / behemoth-spitter:
+  attack_parameters (spit roar via "roarvolume") -> __base__/sound/creatures/Spiters_1_1.ogg .. Spiters_5_2.ogg
+  dying_sound
+    small     -> __base__/sound/creatures/spitter-death-1.ogg .. spitter-death-5.ogg
+    medium    -> __base__/sound/creatures/spitter-death-mid-1.ogg .. spitter-death-mid-7.ogg
+    big       -> __base__/sound/creatures/spitter-death-big-1.ogg .. spitter-death-big-7.ogg
+    behemoth  -> __base__/sound/creatures/spitter-death-behemoth-1.ogg .. spitter-death-behemoth-7.ogg
+  working_sound (idle calls)
+    small     -> __base__/sound/creatures/spitter-call-small-1.ogg .. spitter-call-small-9.ogg
+    medium    -> __base__/sound/creatures/spitter-call-med-1.ogg .. spitter-call-med-10.ogg
+    big/beh   -> __base__/sound/creatures/spitter-call-big-1.ogg .. spitter-call-big-5.ogg
+  walking_sound
+    small/med -> __base__/sound/creatures/spitter-walk-1.ogg .. spitter-walk-10.ogg
+    big/beh   -> __base__/sound/creatures/spitter-walk-big-1.ogg .. spitter-walk-big-10.ogg
+
+Spawners:
+  biter-spawner.working_sound   -> __base__/sound/creatures/spawner.ogg
+  biter-spawner.dying_sound     -> __base__/sound/creatures/spawner-death-1.ogg .. spawner-death-5.ogg
+  spitter-spawner.working_sound -> __base__/sound/creatures/spawner-spitter.ogg
+  spitter-spawner.dying_sound   -> __base__/sound/creatures/spawner-death-1.ogg .. spawner-death-5.ogg (shared)
+
+Worm turrets - small/medium/big/behemoth-worm-turret (data.raw["turret"]):
+  dying_sound
+    small     -> __base__/sound/creatures/worm-death-small-1.ogg .. worm-death-small-4.ogg
+    medium    -> __base__/sound/creatures/worm-death-1.ogg .. worm-death-7.ogg
+    big       -> __base__/sound/creatures/worm-death-big-1.ogg .. worm-death-big-7.ogg
+    behemoth  -> __base__/sound/creatures/worm-death-behemoth-1.ogg .. worm-death-behemoth-5.ogg
+  preparing_sound (stand up)
+    small     -> __base__/sound/creatures/worm-standup-small-1.ogg .. worm-standup-small-3.ogg
+    med/big/beh -> __base__/sound/creatures/worm-standup-1.ogg .. worm-standup-5.ogg
+  prepared_sound (breathing loop)
+    small/med -> __base__/sound/creatures/worm-breathe-1.ogg .. worm-breathe-8.ogg
+    big/beh   -> __base__/sound/creatures/worm-breathe-big-1.ogg .. worm-breathe-big-8.ogg
+  prepared_alternative_sound
+    small/med -> __base__/sound/creatures/worm-roar-alt-1.ogg .. worm-roar-alt-5.ogg
+    big/beh   -> __base__/sound/creatures/worm-roar-alt-big-1.ogg .. worm-roar-alt-big-5.ogg
+  starting_attack_sound (roar before spit)
+    small/med -> __base__/sound/creatures/worm-roar-1.ogg .. worm-roar-4.ogg
+    big/beh   -> __base__/sound/creatures/worm-roar-big-1.ogg .. worm-roar-big-5.ogg
+  folding_sound   -> __base__/sound/creatures/worm-folding-1.ogg .. worm-folding-3.ogg (all sizes)
+
+-----------------------------------------------------------------------------
+3) PLAYER / CHARACTER SOUNDS  (data.raw["character"]["character"] and utility-sounds)
+-----------------------------------------------------------------------------
+character ("character") entity itself only defines one direct sound field:
+  heartbeat -> __base__/sound/heartbeat.ogg   (plays at low health)
+
+Everything else player-related lives on utility-sounds (data.raw["utility-sounds"]["default"])
+  axe_mining_ore        -> __core__/sound/... (manual mining swing on ore)
+  axe_mining_stone      -> __core__/sound/... (manual mining swing on rock/stone)
+  mining_wood           -> __core__/sound/... (manual mining swing on trees)
+  axe_fighting           -> __core__/sound/... (unarmed/melee punch)
+  default_manual_repair  -> __core__/sound/... (repair tool swing, no filename override needed if using default)
+  picked_up_item         -> __core__/sound/spawn-item.ogg family (item pickup ding)
+  drop_item               -> __core__/sound/... (dropping item on ground)
+  inventory_click         -> __core__/sound/... (inventory slot click)
+  inventory_move           -> __core__/sound/... (dragging items in inventory)
+  clear_cursor             -> __core__/sound/clear-cursor.ogg
+  armor_insert / armor_remove -> __core__/sound/armor-insert.ogg / armor-remove.ogg
+  switch_gun                -> __core__/sound/switch-gun.ogg
+  default_landing_steps     -> __core__/sound/walking/default-land-step.ogg (character footsteps on ramps/platforms)
+  build_animated_small/medium/large/huge -> __core__/sound/build-*.ogg (placing buildings by hand)
+  deconstruct_small/medium/large/huge -> __core__/sound/deconstruct-*.ogg (deconstruction planner on player-built entities)
+
+NOTE: normal walking footstep sounds (grass/concrete/stone etc.) are NOT on the
+character entity - they're defined per-tile in data.raw["tile"][*].walking_sound,
+one set per surface material. Ask if you want that full tile-by-tile list too -
+it's a much longer table (~30+ tile types x several variations each).
+
+-----------------------------------------------------------------------------
+HOW TO OVERRIDE (pattern already used in this mod's data-final-fixes.lua)
+-----------------------------------------------------------------------------
+  data.raw["unit"]["small-biter"].attack_parameters.sound = { filename = "__zweihander-soundpack__/sound/...", volume = 1 }
+  data.raw["character"]["character"].heartbeat = { filename = "__zweihander-soundpack__/sound/...", volume = 1 }
+  data.raw["utility-sounds"]["default"].axe_mining_ore = { filename = "__zweihander-soundpack__/sound/...", volume = 1 }
+  data.raw["construction-robot"]["construction-robot"].working_sound = sounds.construction_robot(0.47) -- or your own table
