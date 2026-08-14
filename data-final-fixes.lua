@@ -49,11 +49,21 @@ if utility_sounds then
 end
 
 -- logistic bot sounds
-local bot_sounds = data.raw["logistic-robot"]["logistic-robot"]
-if bot_sounds then
-    bot_sounds.working_sound = {
+local log_bot_sounds = data.raw["logistic-robot"]["logistic-robot"]
+if log_bot_sounds then
+    log_bot_sounds.working_sound = {
         variations = {
-            {filename = "__zweihander-soundpack__/sound/bots/weeeeeeeeeeeeeeeeeee.ogg"}
+            {filename = "__zweihander-soundpack__/sound/bots/weeeeeeeeeeeeeeeeeee.ogg", volume = 0.5}
+        }
+    }
+end
+
+-- construction bot sounds
+local con_bot_sounds = data.raw["construction-robot"]["construction-robot"]
+if con_bot_sounds then
+    con_bot_sounds.working_sound = {
+        variations = {
+            {filename = "__zweihander-soundpack__/sound/bots/weeeeeeeeeeeeeeeeeee.ogg", volume = 0.5}
         }
     }
 end
