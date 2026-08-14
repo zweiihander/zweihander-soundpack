@@ -55,7 +55,7 @@ local log_bot_sounds = data.raw["logistic-robot"]["logistic-robot"]
 if log_bot_sounds then
     log_bot_sounds.working_sound = {
         variations = {
-            { filename = "__zweihander-soundpack__/sound/bots/logistic-robots/blach.ogg", volume = 0.5 },
+            --{ filename = "__zweihander-soundpack__/sound/bots/logistic-robots/blach.ogg", volume = 0.5 },
             { filename = "__zweihander-soundpack__/sound/bots/logistic-robots/eaah.ogg",  volume = 0.5 },
             { filename = "__zweihander-soundpack__/sound/bots/logistic-robots/ech.ogg",   volume = 0.5 },
             { filename = "__zweihander-soundpack__/sound/bots/logistic-robots/eyech.ogg", volume = 0.5 }
