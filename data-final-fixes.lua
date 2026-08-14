@@ -73,9 +73,28 @@ if con_bot_sounds then
     }
 end
 
+-- biter attack sounds (shared across all sizes for now)
+local biter_attack_variations = {
+    { filename = "__zweihander-soundpack__/sound/biters/attack/bluetooth-conected.ogg",                  volume = 0.8 },
+    { filename = "__zweihander-soundpack__/sound/biters/attack/bluetooth-device-turned-off.ogg",         volume = 0.8 },
+    { filename = "__zweihander-soundpack__/sound/biters/attack/bluetooth-mode.ogg",                      volume = 0.8 },
+    { filename = "__zweihander-soundpack__/sound/biters/attack/bluetooth-paired.ogg",                    volume = 0.8 },
+    { filename = "__zweihander-soundpack__/sound/biters/attack/the-bluetooth-device-is-ready-to-pair.ogg", volume = 0.8 },
+    { filename = "__zweihander-soundpack__/sound/biters/attack/voice-over-bluetooth2.ogg",               volume = 0.8 },
+}
+local biter_names = { "small-biter", "medium-biter", "big-biter", "behemoth-biter" }
+for _, name in pairs(biter_names) do
+    local biter = data.raw["unit"][name]
+    if biter then
+        biter.warcry = {
+            variations = biter_attack_variations,
+            aggregation = { max_count = 4, remove = true, count_already_playing = true, priority = "newest" }
+        }
+    end
+end
+
 -- custom sound prototype needed for sounds that require a script hook to fire
 -- e.g new game started
-
 data:extend({
     {
         type = "sound",

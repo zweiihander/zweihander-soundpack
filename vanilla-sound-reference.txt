@@ -27,7 +27,11 @@ utility-sounds (data.raw["utility-sounds"]["default"]) relevant to bots:
 2) BITER / SPITTER / WORM SOUNDS  (data.raw["unit"] and data.raw["turret"])
 -----------------------------------------------------------------------------
 Biters - small-biter / medium-biter / big-biter / behemoth-biter:
-  attack_parameters.sound (roar on attack)
+  warcry (plays ONCE when the unit sets out to attack a target - not defined by vanilla, empty by
+          default, but a valid override point; fires far less often than attack_parameters.sound
+          since it's per-aggro rather than per-swing)
+  attack_parameters.sound (roar on EVERY attack swing, cooldown ~35 ticks/0.6s on small-biter -
+                            fires very frequently, will blow through any aggregation cap fast)
     small     -> __base__/sound/creatures/biter-roar-1.ogg .. biter-roar-6.ogg
     medium    -> __base__/sound/creatures/biter-roar-mid-1.ogg .. biter-roar-mid-7.ogg
     big       -> __base__/sound/creatures/biter-roar-big-1.ogg .. biter-roar-big-5.ogg
@@ -85,7 +89,77 @@ Worm turrets - small/medium/big/behemoth-worm-turret (data.raw["turret"]):
   folding_sound   -> __base__/sound/creatures/worm-folding-1.ogg .. worm-folding-3.ogg (all sizes)
 
 -----------------------------------------------------------------------------
-3) PLAYER / CHARACTER SOUNDS  (data.raw["character"]["character"] and utility-sounds)
+3) PLAYER-BUILT TURRETS  (data.raw["ammo-turret"|"electric-turret"|"fluid-turret"|"artillery-turret"])
+-----------------------------------------------------------------------------
+gun-turret ("gun-turret", ammo-turret):
+  preparing_sound / folding_sound -> sounds.gun_turret_activate / gun_turret_deactivate
+                                      __base__/sound/fight/gun-turret-activate-1..4.ogg
+                                      __base__/sound/fight/gun-turret-deactivate-1..4.ogg
+  open_sound / close_sound        -> sounds.turret_open / turret_close (shared, see below)
+  attack_parameters.sound (gunshot) -> sounds.gun_turret_gunshot
+                                      __base__/sound/fight/gun-turret-gunshot-1..4.ogg
+
+laser-turret ("laser-turret", electric-turret):
+  preparing_sound / folding_sound -> sounds.laser_turret_activate / laser_turret_deactivate
+                                      __base__/sound/fight/laser-turret-activate-1..3.ogg
+                                      __base__/sound/fight/laser-turret-deactivate-1..4.ogg
+  open_sound / close_sound        -> sounds.turret_open / turret_close (shared, see below)
+  no distinct firing sound on the turret itself - the beam attack (attack_parameters.type = "beam")
+  fires via the "laser-beam" entity, not a turret sound field.
+
+flamethrower-turret ("flamethrower-turret", fluid-turret; defined in prototypes/entity/fire.lua):
+  preparing_sound / folding_sound -> sounds.flamethrower_turret_activate / flamethrower_turret_deactivate
+                                      __base__/sound/fight/flamethrower-turret-activate-1..4.ogg
+                                      __base__/sound/fight/flamethrower-turret-deactivate-1..4.ogg
+  open_sound / close_sound        -> sounds.turret_open / turret_close (shared, see below)
+  attack_parameters.cyclic_sound (looping fire stream while attacking):
+    begin_sound  -> __base__/sound/fight/flamethrower-turret-start-1..3.ogg
+    middle_sound -> __base__/sound/fight/flamethrower-turret-mid-1..3.ogg
+    end_sound    -> __base__/sound/fight/flamethrower-turret-end-1..3.ogg
+
+artillery-turret ("artillery-turret"):
+  open_sound / close_sound -> sounds.artillery_open / artillery_close
+                               __base__/sound/artillery-open.ogg / artillery-close.ogg
+  rotating_sound.sound         -> __base__/sound/fight/artillery-rotation-loop.ogg
+  rotating_sound.stopped_sound -> __base__/sound/fight/artillery-rotation-stop.ogg
+  mined_sound -> sounds.deconstruct_large(0.8)
+  (firing sound lives on the artillery shell/projectile, not the turret itself)
+
+shared turret open/close sound (all data.raw["...-turret"] types above except artillery):
+  sounds.turret_open  -> __base__/sound/open-close/turret-open.ogg
+  sounds.turret_close -> __base__/sound/open-close/turret-close.ogg
+
+-- Space Age turrets (data.raw["...-turret"], defined in space-age/prototypes/entity/turrets.lua) --
+railgun-turret ("railgun-turret", ammo-turret):
+  preparing_sound / folding_sound / rotating_sound -> space_age_sounds.railgun_turret_activate /
+                                      railgun_turret_deactivate / railgun_turret_rotate
+                                      __space-age__/sound/entity/railgun-turret/railgun-turret-activate-1.ogg
+                                      __space-age__/sound/entity/railgun-turret/railgun-turret-deactivate-1.ogg
+                                      __space-age__/sound/entity/railgun-turret/railgun-turret-rotation-loop.ogg /
+                                      railgun-turret-rotation-stop.ogg
+  attack sound -> space_age_sounds.railgun_turret_gunshot
+                  __space-age__/sound/entity/railgun-turret/railgun-turret-gunshot-1..5.ogg
+  open_sound / close_sound -> sounds.turret_open / turret_close (shared with base)
+
+rocket-turret ("rocket-turret", ammo-turret):
+  preparing_sound / folding_sound -> __space-age__/sound/entity/rocket-turret/rocket-turret-activate-1..2.ogg
+                                      __space-age__/sound/entity/rocket-turret/rocket-turret-deactivate-1..2.ogg
+  rotating_sound.sound / stopped_sound -> rocket-turret-rotation-loop.ogg / rocket-turret-rotation-stop.ogg
+  open_sound / close_sound -> sounds.turret_open / turret_close (shared with base)
+  (rocket launch sound lives on the ammo, e.g. sound/ammo/rocket-turret-launcher-1..7.ogg)
+
+tesla-turret ("tesla-turret", electric-turret):
+  preparing_sound / folding_sound / rotating_sound -> space_age_sounds.tesla_turret_activate /
+                                      tesla_turret_deactivate / tesla_turret_rotate
+                                      __space-age__/sound/entity/tesla-turret/tesla-turret-activate.ogg
+                                      __space-age__/sound/entity/tesla-turret/tesla-turret-deactivate.ogg
+  base hum (looping while active) -> __space-age__/sound/entity/tesla-turret/tesla-turret-base.ogg
+  beam deflection (chaining hit)  -> tesla_turret_beam_deflect
+                                      __space-age__/sound/entity/tesla-turret/tesla-turret-beam-deflection-1..6.ogg
+  open_sound / close_sound -> sounds.turret_open / turret_close (shared with base)
+
+-----------------------------------------------------------------------------
+4) PLAYER / CHARACTER SOUNDS  (data.raw["character"]["character"] and utility-sounds)
 -----------------------------------------------------------------------------
 character ("character") entity itself only defines one direct sound field:
   heartbeat -> __base__/sound/heartbeat.ogg   (plays at low health)
