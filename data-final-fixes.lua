@@ -15,7 +15,8 @@ if utility_sounds then
             { filename = "__zweihander-soundpack__/sound/game-lost/emotional-damage.ogg",              volume = 1 },
             { filename = "__zweihander-soundpack__/sound/game-lost/sad-hamster.ogg",                   volume = 0.6 },
             { filename = "__zweihander-soundpack__/sound/game-lost/oh-hell-naw.ogg",                   volume = 1 },
-            { filename = "__zweihander-soundpack__/sound/game-lost/spongebob-sound.ogg",               volume = 1 }
+            { filename = "__zweihander-soundpack__/sound/game-lost/spongebob-sound.ogg",               volume = 1 },
+            { filename = "__zweihander-soundpack__/sound/game-lost/oh-no.ogg",                         volume = 1 },
         }
     }
     utility_sounds.game_won = {
@@ -28,6 +29,7 @@ if utility_sounds then
             { filename = "__zweihander-soundpack__/sound/cannot-build/incorrect.ogg", volume = 0.6 },
         }
     }
+    --TODO: Add alert_destroyed sound
     --[[
     utility_sounds.alert_destroyed = {
         variations = {
@@ -53,7 +55,10 @@ local log_bot_sounds = data.raw["logistic-robot"]["logistic-robot"]
 if log_bot_sounds then
     log_bot_sounds.working_sound = {
         variations = {
-            {filename = "__zweihander-soundpack__/sound/bots/weeeeeeeeeeeeeeeeeee.ogg", volume = 0.5}
+            { filename = "__zweihander-soundpack__/sound/bots/logistic-robots/blach.ogg", volume = 0.5 },
+            { filename = "__zweihander-soundpack__/sound/bots/logistic-robots/eaah.ogg",  volume = 0.5 },
+            { filename = "__zweihander-soundpack__/sound/bots/logistic-robots/ech.ogg",   volume = 0.5 },
+            { filename = "__zweihander-soundpack__/sound/bots/logistic-robots/eyech.ogg", volume = 0.5 }
         }
     }
 end
@@ -63,7 +68,7 @@ local con_bot_sounds = data.raw["construction-robot"]["construction-robot"]
 if con_bot_sounds then
     con_bot_sounds.working_sound = {
         variations = {
-            {filename = "__zweihander-soundpack__/sound/bots/weeeeeeeeeeeeeeeeeee.ogg", volume = 0.5}
+            { filename = "__zweihander-soundpack__/sound/bots/construction-robots/weeeeeeeeeeeeeeeeeee.ogg", volume = 0.5 }
         }
     }
 end
@@ -77,7 +82,7 @@ data:extend({
         name = "zweihander-new-game-sound",
         variations = {
             { filename = "__zweihander-soundpack__/sound/new-game/in-the-beginning.ogg", volume = 1 },
-            { filename = "__zweihander-soundpack__/sound/new-game/home-depot.ogg",        volume = 1 },
+            { filename = "__zweihander-soundpack__/sound/new-game/home-depot.ogg",       volume = 1 },
         }
     }
 })
